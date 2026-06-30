@@ -3,6 +3,8 @@ const nav = document.querySelector(".site-nav");
 const forms = document.querySelectorAll(".quote-form");
 const cookieSettingsButtons = document.querySelectorAll(".cookie-settings");
 const consentKey = "jjInstalaterCookieConsent";
+const phoneHref = "tel:+420000000000";
+const emailPhotoHref = "mailto:info@jjinstalater.cz?subject=Fotka%20z%C3%A1vady%20-%20JJ%20instalat%C3%A9r";
 
 menuButton?.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("is-open");
@@ -87,4 +89,27 @@ cookieSettingsButtons.forEach((button) => {
   button.addEventListener("click", () => showCookieBanner(true));
 });
 
+function mountMobileActionBar() {
+  if (document.querySelector(".mobile-action-bar")) return;
+  const bar = document.createElement("nav");
+  bar.className = "mobile-action-bar";
+  bar.setAttribute("aria-label", "Rychlý kontakt");
+  bar.innerHTML = `
+    <a href="${phoneHref}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.4 19.4 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7"/></svg>
+      <span>Volat</span>
+    </a>
+    <a href="kontakt.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg>
+      <span>Poptávka</span>
+    </a>
+    <a href="${emailPhotoHref}">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg>
+      <span>Fotka</span>
+    </a>
+  `;
+  document.body.appendChild(bar);
+}
+
+mountMobileActionBar();
 showCookieBanner();
