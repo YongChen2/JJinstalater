@@ -310,6 +310,21 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   padding: clamp(46px, 6vw, 74px) clamp(20px, 5vw, 74px);
   background: #fff;
 }
+
+.services,
+.pricing-preview,
+.photo-quote,
+.process-wrap,
+.proof-section,
+.area-form,
+.local-seo-section,
+.faq-section,
+.quality,
+.photo-plan,
+.soft-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 620px;
+}
 .section-heading {
   text-align: center;
   margin-bottom: 26px;
@@ -1287,6 +1302,17 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
 
 .mobile-action-bar {
   display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 .photo-quote {
