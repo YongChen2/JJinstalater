@@ -11,6 +11,36 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://jjinstalater.cz/havarijni-servis.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://jjinstalater.cz/montaze-a-opravy.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jjinstalater.cz/rekonstrukce-koupelen.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jjinstalater.cz/topenarske-prace.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jjinstalater.cz/cisteni-odpadu-kanalizaci.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jjinstalater.cz/plynarske-sluzby.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://jjinstalater.cz/cenik.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

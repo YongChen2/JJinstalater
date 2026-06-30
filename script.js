@@ -6,12 +6,12 @@ const consentKey = "jjInstalaterCookieConsent";
 const phoneHref = "tel:+420000000000";
 const emailPhotoHref = "mailto:info@jjinstalater.cz?subject=Fotka%20z%C3%A1vady%20-%20JJ%20instalat%C3%A9r";
 const serviceMenuItems = [
-  ["Havarijní servis", "sluzby.html#havarijni-servis"],
-  ["Montáže a opravy", "sluzby.html#montaze-opravy"],
-  ["Rekonstrukce a renovace koupelen", "sluzby.html#rekonstrukce-koupelen"],
-  ["Topenářské práce", "sluzby.html#topenarske-prace"],
-  ["Čištění odpadů a kanalizací", "sluzby.html#cisteni-odpadu"],
-  ["Plynařské služby", "sluzby.html#plynarske-sluzby"],
+  ["Havarijní servis", "havarijni-servis.html"],
+  ["Montáže a opravy", "montaze-a-opravy.html"],
+  ["Rekonstrukce a renovace koupelen", "rekonstrukce-koupelen.html"],
+  ["Topenářské práce", "topenarske-prace.html"],
+  ["Čištění odpadů a kanalizací", "cisteni-odpadu-kanalizaci.html"],
+  ["Plynařské služby", "plynarske-sluzby.html"],
 ];
 
 function enhanceNavigation() {
@@ -35,7 +35,7 @@ function enhanceNavigation() {
   if (!Array.from(nav.querySelectorAll("a")).some((link) => link.textContent?.trim() === "Pohotovost")) {
     const emergencyLink = document.createElement("a");
     emergencyLink.className = "nav-emergency";
-    emergencyLink.href = "sluzby.html#pohotovost";
+    emergencyLink.href = "havarijni-servis.html";
     emergencyLink.textContent = "Pohotovost";
     dropdown.after(emergencyLink);
   }

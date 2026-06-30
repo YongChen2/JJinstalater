@@ -1112,6 +1112,67 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   box-shadow: 0 12px 30px rgba(6, 26, 61, .08);
 }
 
+.service-page-hero {
+  min-height: 520px;
+}
+
+.service-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background: #fff;
+}
+
+.service-info-grid article {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 28px;
+  background: linear-gradient(180deg, #fff, #f7fbff);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--blue);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 30px rgba(6, 26, 61, .08);
+}
+
+.service-info-grid h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 1.25rem;
+}
+
+.service-info-grid p {
+  margin: 0;
+  color: #334660;
+  font-weight: 650;
+}
+
+.service-info-grid ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.service-info-grid li {
+  position: relative;
+  margin: 9px 0;
+  padding-left: 22px;
+  color: var(--text);
+  font-weight: 780;
+}
+
+.service-info-grid li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid var(--blue);
+  border-bottom: 2px solid var(--blue);
+  transform: rotate(-45deg);
+}
+
 .service-detail-grid h2,
 .pricing-explainer h2 {
   margin: 0 0 12px;
@@ -1584,6 +1645,7 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   .photo-grid,
   .photo-slot-row { grid-template-columns: repeat(2, 1fr); }
   .service-grid,
+  .service-info-grid,
   .service-detail-grid { grid-template-columns: repeat(2, 1fr); }
   .area-form { grid-template-columns: 1fr; }
   .pricing-panel,
@@ -1734,6 +1796,7 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   .trust-band,
   .process-grid,
   .service-grid,
+  .service-info-grid,
   .service-detail-grid,
   .proof-grid,
   .proof-grid.tall,
