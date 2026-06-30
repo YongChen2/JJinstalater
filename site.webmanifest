@@ -1,0 +1,16 @@
+{
+  "name": "JJ instalatér",
+  "short_name": "JJ instalatér",
+  "description": "Instalatérské služby v Liberci a okolí.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#075ee8",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ]
+}

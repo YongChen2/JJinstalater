@@ -603,9 +603,25 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
 }
 .site-footer p { margin: 0; max-width: 270px; }
 .site-footer a,
-.site-footer span {
+.site-footer span,
+.site-footer button {
   display: block;
   margin: 8px 0;
+}
+.footer-link {
+  padding: 0;
+  color: rgba(255,255,255,.83);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.footer-link:hover,
+.site-footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 .socials { display: flex; gap: 12px; }
 .socials a {
@@ -951,6 +967,95 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   top: 110px;
 }
 
+.legal-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: clamp(54px, 7vw, 96px) clamp(20px, 5vw, 74px);
+}
+
+.legal-page h1 {
+  margin: 0 0 22px;
+  color: var(--navy);
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  line-height: 1;
+}
+
+.legal-page h2 {
+  margin: 34px 0 10px;
+  color: var(--navy);
+  font-size: 1.35rem;
+}
+
+.legal-page p {
+  color: #334660;
+  font-size: 1.05rem;
+  font-weight: 650;
+}
+
+.legal-page a {
+  color: var(--blue);
+  font-weight: 850;
+}
+
+.cookie-banner {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  gap: 18px;
+  align-items: center;
+  width: min(720px, calc(100vw - 44px));
+  padding: 20px;
+  color: var(--text);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 70px rgba(3, 17, 38, .24);
+}
+
+.cookie-banner strong {
+  display: block;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.cookie-banner p {
+  margin: 5px 0 8px;
+  color: #334660;
+  font-size: .94rem;
+  font-weight: 650;
+}
+
+.cookie-banner a {
+  color: var(--blue);
+  font-weight: 850;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cookie-actions button {
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #c4d6f9;
+  color: var(--blue);
+  background: #fff;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.cookie-actions button:last-child {
+  color: #fff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
 .faq-section {
   background: #fff;
 }
@@ -1129,6 +1234,16 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   .quality { align-items: start; }
   .signature { margin-top: 0 !important; }
   .site-footer { gap: 24px; }
+  .cookie-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    grid-template-columns: 1fr;
+    width: auto;
+  }
+  .cookie-actions {
+    display: grid;
+  }
   .page-hero,
   .contact-page {
     padding: 38px 20px;
