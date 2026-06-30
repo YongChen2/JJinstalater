@@ -70,6 +70,7 @@ function showCookieBanner(force = false) {
       <a href="cookies.html">Více o cookies</a>
     </div>
     <div class="cookie-actions">
+      <button type="button" data-cookie-choice="rejected">Odmítnout</button>
       <button type="button" data-cookie-choice="necessary">Pouze nezbytné</button>
       <button type="button" data-cookie-choice="analytics">Povolit analytiku</button>
     </div>
