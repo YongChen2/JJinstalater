@@ -5,6 +5,56 @@ const cookieSettingsButtons = document.querySelectorAll(".cookie-settings");
 const consentKey = "jjInstalaterCookieConsent";
 const phoneHref = "tel:+420000000000";
 const emailPhotoHref = "mailto:info@jjinstalater.cz?subject=Fotka%20z%C3%A1vady%20-%20JJ%20instalat%C3%A9r";
+const serviceMenuItems = [
+  ["Havarijní servis", "sluzby.html#havarijni-servis"],
+  ["Montáže a opravy", "sluzby.html#montaze-opravy"],
+  ["Rekonstrukce a renovace koupelen", "sluzby.html#rekonstrukce-koupelen"],
+  ["Topenářské práce", "sluzby.html#topenarske-prace"],
+  ["Čištění odpadů a kanalizací", "sluzby.html#cisteni-odpadu"],
+  ["Plynařské služby", "sluzby.html#plynarske-sluzby"],
+];
+
+function enhanceNavigation() {
+  if (!nav || nav.dataset.enhanced === "true") return;
+  const servicesLink = Array.from(nav.querySelectorAll("a")).find((link) => link.textContent?.trim() === "Služby");
+  if (!servicesLink) return;
+
+  const dropdown = document.createElement("div");
+  dropdown.className = "nav-dropdown";
+  dropdown.innerHTML = `
+    <button class="nav-dropdown-toggle" type="button" aria-expanded="false">
+      Služby
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </button>
+    <div class="nav-dropdown-menu">
+      ${serviceMenuItems.map(([label, href]) => `<a href="${href}">${label}</a>`).join("")}
+    </div>
+  `;
+  servicesLink.replaceWith(dropdown);
+
+  if (!Array.from(nav.querySelectorAll("a")).some((link) => link.textContent?.trim() === "Pohotovost")) {
+    const emergencyLink = document.createElement("a");
+    emergencyLink.className = "nav-emergency";
+    emergencyLink.href = "sluzby.html#pohotovost";
+    emergencyLink.textContent = "Pohotovost";
+    dropdown.after(emergencyLink);
+  }
+
+  const toggle = dropdown.querySelector(".nav-dropdown-toggle");
+  toggle?.addEventListener("click", () => {
+    const isOpen = dropdown.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!dropdown.contains(event.target)) {
+      dropdown.classList.remove("is-open");
+      toggle?.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  nav.dataset.enhanced = "true";
+}
 
 menuButton?.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("is-open");
@@ -14,6 +64,8 @@ menuButton?.addEventListener("click", () => {
 nav?.addEventListener("click", (event) => {
   if (event.target instanceof HTMLAnchorElement) {
     nav.classList.remove("is-open");
+    nav.querySelector(".nav-dropdown")?.classList.remove("is-open");
+    nav.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
     menuButton?.setAttribute("aria-expanded", "false");
   }
 });
@@ -111,5 +163,6 @@ function mountMobileActionBar() {
   document.body.appendChild(bar);
 }
 
+enhanceNavigation();
 mountMobileActionBar();
 showCookieBanner();
