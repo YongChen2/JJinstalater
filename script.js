@@ -1,6 +1,6 @@
 const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".site-nav");
-const form = document.querySelector(".quote-form");
+const forms = document.querySelectorAll(".quote-form");
 
 menuButton?.addEventListener("click", () => {
   const isOpen = nav.classList.toggle("is-open");
@@ -14,11 +14,13 @@ nav?.addEventListener("click", (event) => {
   }
 });
 
-form?.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const status = form.querySelector(".form-status");
-  form.reset();
-  if (status) {
-    status.value = "Děkujeme. Ozveme se vám co nejdříve.";
-  }
+forms.forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const status = form.querySelector(".form-status");
+    form.reset();
+    if (status) {
+      status.value = "Děkujeme. Ozveme se vám co nejdříve.";
+    }
+  });
 });
