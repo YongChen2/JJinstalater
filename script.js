@@ -163,6 +163,60 @@ function mountMobileActionBar() {
   document.body.appendChild(bar);
 }
 
+function mountRevealAnimations() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || !("IntersectionObserver" in window)) return;
+
+  const revealItems = document.querySelectorAll([
+    ".section-heading",
+    ".service-grid article",
+    ".emergency-grid a",
+    ".pricing-panel",
+    ".photo-quote",
+    ".process-grid > div",
+    ".proof-grid > *",
+    ".area-panel",
+    ".quote-form",
+    ".faq-grid details",
+    ".service-detail-grid article",
+    ".service-info-grid article",
+    ".work-card",
+    ".review-card",
+  ].join(","));
+
+  const revealVisibleItems = () => {
+    revealItems.forEach((item) => {
+      if (item.classList.contains("is-visible")) return;
+      const rect = item.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.92) {
+        item.classList.add("is-visible");
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.12 });
+
+  revealItems.forEach((item, index) => {
+    item.classList.add("reveal-item");
+    item.style.transitionDelay = `${Math.min(index % 4, 3) * 45}ms`;
+    observer.observe(item);
+  });
+
+  revealVisibleItems();
+  window.addEventListener("scroll", revealVisibleItems, { passive: true });
+  window.addEventListener("resize", revealVisibleItems);
+  window.setTimeout(() => {
+    revealItems.forEach((item) => item.classList.add("is-visible"));
+  }, 2200);
+}
+
 enhanceNavigation();
 mountMobileActionBar();
+mountRevealAnimations();
 showCookieBanner();

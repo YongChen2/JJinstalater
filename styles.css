@@ -28,6 +28,15 @@ a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
+.section,
+.process-wrap,
+.area-form,
+.quality,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 760px;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -195,6 +204,7 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   padding: 12px 22px;
   border-radius: var(--radius);
   font-weight: 900;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease, border-color .18s ease;
 }
 .header-cta,
 .button.primary {
@@ -215,6 +225,14 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   color: var(--blue);
   background: #fff;
   border: 2px solid #c4d6f9;
+}
+.header-cta:hover,
+.button:hover {
+  transform: translateY(-2px);
+}
+.button.secondary:hover {
+  border-color: var(--blue);
+  box-shadow: 0 14px 30px rgba(7, 94, 232, .12);
 }
 .button.ghost {
   color: var(--navy);
@@ -453,10 +471,11 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: 0 12px 30px rgba(6, 26, 61, .08);
-  transition: transform .2s ease, box-shadow .2s ease;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .service-grid article:hover {
   transform: translateY(-4px);
+  border-color: #b8d0f8;
   box-shadow: 0 20px 42px rgba(6, 26, 61, .12);
 }
 .service-grid svg {
@@ -863,6 +882,23 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
 .contact-cards a:hover {
   transform: translateY(-3px);
   box-shadow: 0 22px 44px rgba(6, 26, 61, .14);
+}
+
+.pricing-explainer article,
+.work-card,
+.review-card,
+.review-grid article,
+.contact-cards > * {
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.pricing-explainer article:hover,
+.work-card:hover,
+.review-card:hover,
+.review-grid article:hover {
+  transform: translateY(-3px);
+  border-color: #bfd6f7;
+  box-shadow: 0 22px 44px rgba(6, 26, 61, .12);
 }
 
 .emergency-grid strong,
@@ -1481,8 +1517,23 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
   display: none;
 }
 
+.reveal-item {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+  }
   *,
   *::before,
   *::after {
