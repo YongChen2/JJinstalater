@@ -8,10 +8,10 @@ const emailPhotoHref = "mailto:info@jjinstalater.cz?subject=Fotka%20z%C3%A1vady%
 const serviceMenuItems = [
   ["Havarijní servis", "havarijni-servis.html"],
   ["Montáže a opravy", "montaze-a-opravy.html"],
-  ["Rekonstrukce a renovace koupelen", "rekonstrukce-koupelen.html"],
-  ["Topenářské práce", "topenarske-prace.html"],
-  ["Čištění odpadů a kanalizací", "cisteni-odpadu-kanalizaci.html"],
-  ["Plynařské služby", "plynarske-sluzby.html"],
+  ["Drobné opravy odpadů", "cisteni-odpadu-kanalizaci.html"],
+  ["Montáž sanity", "montaze-a-opravy.html#sanita"],
+  ["Připojení spotřebičů", "montaze-a-opravy.html#spotrebice"],
+  ["Pomocné instalační práce", "sluzby.html#pomocne-prace"],
 ];
 
 function enhanceNavigation() {
