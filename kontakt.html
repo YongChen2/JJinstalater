@@ -60,6 +60,9 @@
           <label><span>E-mail</span><input name="email" type="email" autocomplete="email"></label>
           <label><span>Typ služby</span><select name="service"><option>Výměna baterie, sifonu nebo ventilu</option><option>Připojení pračky, myčky nebo bojleru</option><option>Kapající voda nebo protékající WC</option><option>Montáž umyvadla, WC nebo sprchy</option><option>Drobné opravy odpadů</option><option>Pomocné práce u větší instalace</option><option>Jiné</option></select></label>
           <label><span>Město</span><input name="city" type="text" autocomplete="address-level2"></label>
+          <label><span>Preferované datum</span><input class="appointment-date" name="appointmentDate" type="date" required></label>
+          <label><span>Preferovaný čas</span><select class="appointment-time" name="appointmentTime" required><option value="">Nejdřív vyberte datum</option></select></label>
+          <p class="availability-note" aria-live="polite">Termíny jsou orientační. Obsazené časy mají blokaci 2 hodiny.</p>
           <label><span>Urgentnost</span><select name="urgency"><option>Co nejdříve</option><option>Dnes</option><option>Tento týden</option><option>Jen se ptám předem</option></select></label>
           <label><span>Popište, s čím potřebujete pomoci</span><textarea name="message" rows="6" required></textarea></label>
           <button type="submit">Odeslat poptávku</button>

@@ -13,6 +13,111 @@ const serviceMenuItems = [
   ["Připojení spotřebičů", "montaze-a-opravy.html#spotrebice"],
   ["Pomocné instalační práce", "sluzby.html#pomocne-prace"],
 ];
+const appointmentStartHour = 15;
+const appointmentEndHour = 19;
+const appointmentStepMinutes = 30;
+const appointmentBlockMinutes = 120;
+
+function padNumber(value) {
+  return String(value).padStart(2, "0");
+}
+
+function toDateInputValue(date) {
+  return `${date.getFullYear()}-${padNumber(date.getMonth() + 1)}-${padNumber(date.getDate())}`;
+}
+
+function addDays(date, days) {
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + days);
+  return nextDate;
+}
+
+function buildBookedAppointments() {
+  const today = new Date();
+  return {
+    [toDateInputValue(addDays(today, 1))]: ["16:00"],
+    [toDateInputValue(addDays(today, 3))]: ["17:30"],
+    [toDateInputValue(addDays(today, 6))]: ["15:30", "18:00"],
+  };
+}
+
+const bookedAppointments = buildBookedAppointments();
+
+function timeToMinutes(time) {
+  const [hours, minutes] = time.split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+function formatDateForCustomer(dateValue) {
+  if (!dateValue) return "";
+  const [year, month, day] = dateValue.split("-");
+  return `${day}. ${month}. ${year}`;
+}
+
+function getAvailableTimes(dateValue) {
+  const blockedTimes = bookedAppointments[dateValue] || [];
+  const availableTimes = [];
+  const startMinutes = appointmentStartHour * 60;
+  const endMinutes = appointmentEndHour * 60;
+
+  for (let minutes = startMinutes; minutes <= endMinutes; minutes += appointmentStepMinutes) {
+    const time = `${padNumber(Math.floor(minutes / 60))}:${padNumber(minutes % 60)}`;
+    const isBlocked = blockedTimes.some((blockedTime) => {
+      return Math.abs(minutes - timeToMinutes(blockedTime)) < appointmentBlockMinutes;
+    });
+    availableTimes.push({ time, isBlocked });
+  }
+
+  return availableTimes;
+}
+
+function enhanceAppointmentFields(form) {
+  const dateInput = form.querySelector(".appointment-date");
+  const timeSelect = form.querySelector(".appointment-time");
+  const note = form.querySelector(".availability-note");
+  if (!dateInput || !timeSelect) return;
+
+  const today = new Date();
+  dateInput.min = toDateInputValue(today);
+  dateInput.max = toDateInputValue(addDays(today, 30));
+
+  const renderTimes = () => {
+    const dateValue = dateInput.value;
+    timeSelect.innerHTML = "";
+
+    if (!dateValue) {
+      timeSelect.disabled = true;
+      timeSelect.innerHTML = '<option value="">Nejdřív vyberte datum</option>';
+      if (note) note.textContent = "Termíny jsou orientační. Obsazené časy mají blokaci 2 hodiny.";
+      return;
+    }
+
+    timeSelect.disabled = false;
+    const placeholder = document.createElement("option");
+    placeholder.value = "";
+    placeholder.textContent = "Vyberte čas";
+    timeSelect.appendChild(placeholder);
+
+    const availableTimes = getAvailableTimes(dateValue);
+    availableTimes.forEach(({ time, isBlocked }) => {
+      const option = document.createElement("option");
+      option.value = time;
+      option.textContent = isBlocked ? `${time} - obsazeno` : time;
+      option.disabled = isBlocked;
+      timeSelect.appendChild(option);
+    });
+
+    const blockedCount = availableTimes.filter(({ isBlocked }) => isBlocked).length;
+    if (note) {
+      note.textContent = blockedCount
+        ? `Pro ${formatDateForCustomer(dateValue)} jsou některé časy obsazené. Další termín lze vybrat až po 2 hodinách.`
+        : `Pro ${formatDateForCustomer(dateValue)} jsou zatím všechny odpolední časy volné.`;
+    }
+  };
+
+  dateInput.addEventListener("change", renderTimes);
+  renderTimes();
+}
 
 function enhanceNavigation() {
   if (!nav || nav.dataset.enhanced === "true") return;
@@ -81,17 +186,22 @@ forms.forEach((form) => {
       `E-mail: ${data.get("email") || ""}`,
       `Typ služby: ${data.get("service") || ""}`,
       `Město: ${data.get("city") || ""}`,
+      `Preferované datum: ${formatDateForCustomer(data.get("appointmentDate") || "")}`,
+      `Preferovaný čas: ${data.get("appointmentTime") || ""}`,
       `Urgentnost: ${data.get("urgency") || ""}`,
       "",
       `Popis: ${data.get("message") || ""}`,
     ];
     const mailto = `mailto:info@jjinstalater.cz?subject=${encodeURIComponent("Poptávka z webu JJ instalatér")}&body=${encodeURIComponent(lines.join("\n"))}`;
     form.reset();
+    form.querySelector(".appointment-date")?.dispatchEvent(new Event("change"));
     if (status) {
       status.innerHTML = `Děkujeme. Poptávka je připravená. <a href="${mailto}">Klikněte pro odeslání e-mailem</a>.`;
     }
   });
 });
+
+forms.forEach(enhanceAppointmentFields);
 
 function loadAnalytics() {
   document.documentElement.dataset.analytics = "allowed";

@@ -326,6 +326,17 @@
             <input name="city" type="text" autocomplete="address-level2">
           </label>
           <label>
+            <span>Preferované datum</span>
+            <input class="appointment-date" name="appointmentDate" type="date" required>
+          </label>
+          <label>
+            <span>Preferovaný čas</span>
+            <select class="appointment-time" name="appointmentTime" required>
+              <option value="">Nejdřív vyberte datum</option>
+            </select>
+          </label>
+          <p class="availability-note" aria-live="polite">Termíny jsou orientační. Obsazené časy mají blokaci 2 hodiny.</p>
+          <label>
             <span>Popište, s čím potřebujete pomoci</span>
             <textarea name="message" rows="5" required></textarea>
           </label>

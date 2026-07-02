@@ -702,6 +702,21 @@ svg { width: 1.25rem; height: 1.25rem; fill: none; stroke: currentColor; stroke-
 .quote-form input:focus,
 .quote-form select:focus,
 .quote-form textarea:focus { outline-color: var(--cyan); }
+.quote-form select:disabled {
+  color: #7b8798;
+  background: #edf3fb;
+  cursor: not-allowed;
+}
+.availability-note {
+  margin: -4px 0 2px;
+  padding: 10px 12px;
+  color: #dceaff;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--radius);
+  font-size: .86rem;
+  font-weight: 760;
+}
 .quote-form button {
   min-height: 54px;
   margin-top: 4px;
